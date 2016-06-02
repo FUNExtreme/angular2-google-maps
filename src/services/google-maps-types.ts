@@ -51,18 +51,49 @@ export interface LatLngLiteral {
   lng: number;
 }
 
+export enum MapType {
+  HYBRID,
+  ROADMAP,
+  SATELLITE,
+  TERRAIN
+}
+
 export interface MouseEvent { latLng: LatLng; }
 
 export interface MapOptions {
   center?: LatLng | LatLngLiteral;
   zoom?: number;
   disableDoubleClickZoom?: boolean;
-  disableDefaultUI?: boolean;
   backgroundColor?: string;
+  disableDefaultUI?: boolean;
+  draggable?: boolean;
   draggableCursor?: string;
   draggingCursor?: string;
+  heading?: number;
   keyboardShortcuts?: boolean;
+  mapMaker?: boolean;
+  mapTypeControl?: boolean;
+  mapTypeControlOptions?: Object;
+  mapTypeId?: MapType;
+  maxZoom?: number;
+  minZoom?: number;
+  noClear?: boolean;
+  overviewMapControl?: boolean;
+  overviewMapControlOptions?: Object;
+  panControl?: boolean;
+  panControlOptions?: Object;
+  rotateControl?: boolean;
+  rotateControlOptions?: Object;
+  scaleControl?: boolean;
+  scaleControlOptions?: Object;
+  scrollwheel?: boolean;
+  streetView?: Object;
+  streetViewControl?: boolean;
+  streetViewControlOptions?: Object;
+  styles?: Object[];
+  tilt?: number;
   zoomControl?: boolean;
+  zoomControlOptions?: Object;
 }
 
 export interface InfoWindow {

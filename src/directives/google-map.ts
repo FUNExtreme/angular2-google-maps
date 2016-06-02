@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, OnChanges, OnInit, SimpleChange} fr
 import {GoogleMapsAPIWrapper} from '../services/google-maps-api-wrapper';
 import {MarkerManager} from '../services/marker-manager';
 import {InfoWindowManager} from '../services/info-window-manager';
-import {LatLng, LatLngLiteral} from '../services/google-maps-types';
+import {LatLng, LatLngLiteral, MapOptions} from '../services/google-maps-types';
 import {MouseEvent} from '../events';
 
 /**
@@ -35,7 +35,7 @@ import {MouseEvent} from '../events';
   providers: [GoogleMapsAPIWrapper, MarkerManager, InfoWindowManager],
   inputs: [
     'longitude', 'latitude', 'zoom', 'disableDoubleClickZoom', 'disableDefaultUI', 'scrollwheel',
-    'backgroundColor', 'draggableCursor', 'draggingCursor', 'keyboardShortcuts', 'zoomControl'
+    'backgroundColor', 'draggableCursor', 'draggingCursor', 'keyboardShortcuts', 'zoomControl', 'mapOptions'
   ],
   outputs: ['mapClick', 'mapRightClick', 'mapDblClick', 'centerChange'],
   host: {'[class.sebm-google-map-container]': 'true'},
@@ -116,6 +116,12 @@ export class SebmGoogleMap implements OnChanges,
     'disableDoubleClickZoom', 'scrollwheel', 'draggableCursor', 'draggingCursor',
     'keyboardShortcuts', 'zoomControl'
   ];
+  
+  /**
+   * Add some options for the map (see
+   * https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapOptions)
+   */
+  mapOptions: MapOptions = {};
 
   /**
    * This event emitter gets emitted when the user clicks on the map (but not when they click on a
@@ -149,16 +155,17 @@ export class SebmGoogleMap implements OnChanges,
   }
 
   private _initMapInstance(el: HTMLElement) {
-    this._mapsWrapper.createMap(el, {
-      center: {lat: this._latitude, lng: this._longitude},
-      zoom: this._zoom,
-      disableDefaultUI: this.disableDefaultUI,
-      backgroundColor: this.backgroundColor,
-      draggableCursor: this.draggableCursor,
-      draggingCursor: this.draggingCursor,
-      keyboardShortcuts: this.keyboardShortcuts,
-      zoomControl: this.zoomControl
-    });
+    let options = this.mapOptions;
+    options.center = {lat: this._latitude, lng: this._longitude},
+    options.zoom = this._zoom,
+    options.disableDefaultUI = this.disableDefaultUI,
+    options.backgroundColor = this.backgroundColor,
+    options.draggableCursor = this.draggableCursor,
+    options.draggingCursor = this.draggingCursor,
+    options.keyboardShortcuts = this.keyboardShortcuts,
+    options.zoomControl = this.zoomControl
+    this._mapsWrapper.createMap(el, options);
+    
     this._handleMapCenterChange();
     this._handleMapZoomChange();
     this._handleMapMouseEvents();

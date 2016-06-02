@@ -15,3 +15,7 @@ gulp.task('test', function testTask(done) {
 });
 
 gulp.task('test:watch', ['scripts:test', 'watch:testfiles', 'watch:srcFiles', 'karma:watch']);
+
+gulp.task('bundlefiles', function testTask(done) {
+  runSequence(['copyReleaseAssets', 'scripts', 'bundle'], done);
+});

@@ -105,8 +105,8 @@ export class SebmGoogleMapMarker implements OnDestroy,
     if (typeof this.latitude !== 'number' || typeof this.longitude !== 'number') {
       return;
     }
-    if (!this._markerAddedToManger) {
-      this._markerManager.addMarker(this);
+    if (!this._markerAddedToManger) {    
+      this._markerManager.addMarker(this);    
       this._markerAddedToManger = true;
       this._addEventListeners();
       return;
