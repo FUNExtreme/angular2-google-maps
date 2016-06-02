@@ -87,6 +87,7 @@ export class SebmGoogleMapMarker implements OnDestroy,
   dragEnd: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   @ContentChild(SebmGoogleMapInfoWindow) private _infoWindow: SebmGoogleMapInfoWindow;
+  @ContentChild(SebmGoogleMapInfoWindow) private _infoBox: SebmGoogleMapInfoWindow;
 
   private _markerAddedToManger: boolean = false;
   private _id: string;
@@ -97,6 +98,9 @@ export class SebmGoogleMapMarker implements OnDestroy,
   ngAfterContentInit() {
     if (this._infoWindow != null) {
       this._infoWindow.hostMarker = this;
+    }
+    if (this._infoBox != null) {
+      this._infoBox.hostMarker = this;
     }
   }
 

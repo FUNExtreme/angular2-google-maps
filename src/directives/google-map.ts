@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, OnChanges, OnInit, SimpleChange} fr
 import {GoogleMapsAPIWrapper} from '../services/google-maps-api-wrapper';
 import {MarkerManager} from '../services/marker-manager';
 import {InfoWindowManager} from '../services/info-window-manager';
+import {InfoBoxManager} from '../services/info-box-manager';
 import {LatLng, LatLngLiteral, MapOptions} from '../services/google-maps-types';
 import {MouseEvent} from '../events';
 
@@ -32,7 +33,7 @@ import {MouseEvent} from '../events';
  */
 @Component({
   selector: 'sebm-google-map',
-  providers: [GoogleMapsAPIWrapper, MarkerManager, InfoWindowManager],
+  providers: [GoogleMapsAPIWrapper, MarkerManager, InfoWindowManager, InfoBoxManager],
   inputs: [
     'longitude', 'latitude', 'zoom', 'disableDoubleClickZoom', 'disableDefaultUI', 'scrollwheel',
     'backgroundColor', 'draggableCursor', 'draggingCursor', 'keyboardShortcuts', 'zoomControl', 'mapOptions'
