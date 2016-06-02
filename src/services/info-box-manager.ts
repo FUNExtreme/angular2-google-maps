@@ -49,13 +49,7 @@ export class InfoBoxManager {
   addInfoBox(infoBox: GoogleMapInfoBox) {
     const options: InfoBoxOptions = {
         content: infoBox.content,
-        boxStyle: {
-            border: "none",
-            textAlign: "center",
-            fontSize: "8pt",
-            width: "auto",
-            color: "#800000"
-        },
+        boxStyle: infoBox.boxStyles,
         disableAutoPan: true,
         pixelOffset: new google.maps.Size(10, -10),
         closeBoxURL: "",

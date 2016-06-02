@@ -1,12 +1,13 @@
 import {Component, SimpleChange, OnDestroy, OnChanges, ElementRef} from 'angular2/core';
 import {InfoBoxManager} from '../services/info-box-manager';
 import {SebmGoogleMapMarker} from './google-map-marker';
+import { InfoBoxStyle } from './../services/info-box-types';
 
 let infoWindowId = 0;
 
 @Component({
   selector: 'google-map-info-box',
-  inputs: ['latitude', 'longitude'],
+  inputs: ['latitude', 'longitude', 'boxStyles'],
   template: `
     <div class='google-map-info-box-content'>
       <ng-content></ng-content>
@@ -26,7 +27,8 @@ export class GoogleMapInfoBox implements OnDestroy, OnChanges {
   maxWidth: number;
 
   hostMarker: SebmGoogleMapMarker;
-
+  
+  boxStyles: InfoBoxStyle;
 
   private static _infoBoxOptionsInputs: string[] = ['disableAutoPan', 'maxWidth'];
   private _infoBoxAddedToManager: boolean = false;
